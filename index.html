@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Kak Zuu 🎂</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selamat Ulang Tahun, Kak Zuu 🎉</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
       font-family: 'Comic Sans MS', cursive;
       background: linear-gradient(135deg, #ffd6ec, #d0f0ff);
       color: #ff69b4;
       text-align: center;
       overflow-x: hidden;
-      padding: 10px;
+      min-height: 100vh;
     }
+
     h1 {
-      margin-top: 40px;
       font-size: 2.2em;
-      color: #ff6ec7;
+      margin: 50px 20px 10px;
       animation: bounce 2s infinite;
     }
+
     p {
       font-size: 1.1em;
       margin: 10px 20px;
     }
+
     button {
       background-color: #ffb6c1;
       color: white;
@@ -38,6 +37,7 @@
       margin: 15px 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+
     button:hover {
       background-color: #ff69b4;
     }
@@ -46,30 +46,26 @@
       margin: 25px auto;
       width: 90%;
       max-width: 300px;
-      height: auto;
-      aspect-ratio: 1/1;
       border: 10px solid #ffc0cb;
       border-radius: 30px;
       box-shadow: 0 0 20px rgba(255,182,193,0.6);
       overflow: hidden;
-      animation: fadeInOut 5s infinite;
     }
+
     .photo-frame img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
     }
-    @keyframes fadeInOut {
-      0% { opacity: 0; transform: scale(0.9); }
-      10% { opacity: 1; transform: scale(1); }
-      90% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.9); }
+
+    #surprise {
+      display: none;
+      margin-top: 20px;
     }
 
     .card {
       display: none;
       position: fixed;
-      bottom: -400px;
+      bottom: 100px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
@@ -79,13 +75,27 @@
       box-shadow: 0 0 30px rgba(0,0,0,0.3);
       padding: 20px;
       z-index: 999;
-      animation: slideUp 1.5s forwards;
+      animation: slideUp 1s ease-out;
     }
 
-    @keyframes slideUp {
-      to {
-        bottom: 80px;
-      }
+    .card h2 {
+      color: #ff69b4;
+      margin-bottom: 10px;
+    }
+
+    .close-btn {
+      background: #ff6b81;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 15px;
+      font-size: 0.9em;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background-color: #d94f65;
     }
 
     @keyframes bounce {
@@ -93,20 +103,27 @@
       50% { transform: translateY(-15px); }
     }
 
-    #musicBtn {
-      background-color: #add8e6;
+    @keyframes slideUp {
+      from { transform: translate(-50%, 200px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
     }
 
-    @media screen and (max-width: 500px) {
-      h1 {
-        font-size: 1.7em;
-      }
-      p {
-        font-size: 1em;
-      }
-      button {
-        font-size: 0.95em;
-        padding: 10px 20px;
+    /* Bintang jatuh */
+    .star {
+      position: fixed;
+      top: -10px;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: fall linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
       }
     }
   </style>
@@ -116,28 +133,25 @@
   <p>maaf telat ngucapin, tapi semoga tetap jadi momen spesial</p>
   <p>semoga Kak Zuu Sehat" ajaa sorry kalo cuma bisa ngucapin dari ini ajaa💙</p>
 
-  <!-- FOTO SLIDESHOW -->
+
   <div class="photo-frame">
-    <img src="foto.png" alt="Foto Kak Zuu" />
+    <img src="foto.png" alt="Foto Kak Zuu">
   </div>
 
-  <!-- MUSIK -->
-  <audio id="bgMusic" autoplay loop>
-    <source src="lagu.mp3" type="audio/mpeg">
-    Browsermu tidak mendukung audio.
-  </audio>
-  <button id="musicBtn" onclick="toggleMusic()">🔊 Musik</button>
-
-  <!-- TOMBOL KEJUTAN -->
+  <button onclick="music.play()">▶️ Play Musik</button>
+  <button onclick="music.pause()">⏸️ Stop Musik</button>
   <button onclick="showSurprise()">Klik untuk Kejutan 🎁</button>
 
-  <!-- KEJUTAN ANIMASI -->
-  <div id="surprise" style="display:none; margin-top:20px;">
+  <audio id="music" loop>
+    <source src="lagu.mp3" type="audio/mp3">
+    Browsermu tidak mendukung audio.
+  </audio>
+
+  <div id="surprise">
     <img src="https://media.giphy.com/media/3oKIPf3C7HqqYBVcCk/giphy.gif" width="150" />
     <p>🎈 Ini peluk virtual & cupcake spesial buat Kak Zuu! 🧁</p>
   </div>
 
-  <!-- KARTU UCAPAN -->
   <div id="birthdayCard" class="card">
     <h2>💌 Untuk Kak Zuu</h2>
     <p>Semoga kak zuu bisa terus ceria</p>
@@ -145,25 +159,27 @@
   </div>
 
   <script>
-    const music = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicBtn');
-    let musicPlaying = true;
-
-    function toggleMusic() {
-      if (musicPlaying) {
-        music.pause();
-        musicBtn.textContent = "🔇 Musik Mati";
-      } else {
-        music.play();
-        musicBtn.textContent = "🔊 Musik";
-      }
-      musicPlaying = !musicPlaying;
-    }
+    const music = document.getElementById('music');
 
     function showSurprise() {
       document.getElementById('surprise').style.display = 'block';
       document.getElementById('birthdayCard').style.display = 'block';
     }
+
+    function closeCard() {
+      document.getElementById('birthdayCard').style.display = 'none';
+    }
+
+    // Bintang jatuh generator
+    function createStar() {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 5000);
+    }
+    setInterval(createStar, 150);
   </script>
 </body>
 </html>
